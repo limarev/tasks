@@ -1,0 +1,82 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "ubuntu",
+      "inherits": ["linux"],
+      "cacheVariables": {
+        "CLANG_PATH": "/usr/lib/llvm-17"
+      },
+      "vendor": {
+        "jetbrains.com/clion": {
+          "toolchain": "Ubuntu"
+        }
+      },
+      "hidden": true
+    },
+    {
+      "name": "macos-m1",
+      "inherits": ["darwin"],
+      "cacheVariables": {
+        "CLANG_PATH": "/opt/homebrew/Cellar/llvm/18.1.4"
+      },
+      "hidden": true
+    },
+    {
+      "name": "ubuntu-ninja-clang-debug",
+      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "debug"]
+    },
+    {
+      "name": "ubuntu-ninja-clang-release",
+      "inherits": ["default", "ubuntu", "ninja", "clang-linux-amd64", "release"]
+    },
+    {
+      "name": "macos-m1-ninja-clang-debug",
+      "inherits": ["default", "macos-m1", "ninja", "clang-darwin-arm64", "debug"]
+    },
+    {
+      "name": "macos-m1-ninja-clang-release",
+      "inherits": ["default", "macos-m1", "ninja", "clang-darwin-arm64", "release"]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ubuntu-ninja-clang-debug",
+      "configurePreset": "ubuntu-ninja-clang-debug"
+    },
+    {
+      "name": "ubuntu-ninja-clang-release",
+      "configurePreset": "ubuntu-ninja-clang-release"
+    },
+    {
+      "name": "macos-m1-ninja-clang-debug",
+      "configurePreset": "macos-m1-ninja-clang-debug"
+    },
+    {
+      "name": "macos-m1-ninja-clang-release",
+      "configurePreset": "macos-m1-ninja-clang-release"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "default-deb",
+      "inherits": ["deb", "default"],
+      "configurePreset": "ubuntu-ninja-clang-release"
+    },
+    {
+      "name": "default-rpm",
+      "inherits": ["rpm", "default"],
+      "configurePreset": "ubuntu-ninja-clang-release"
+    },
+    {
+      "name": "default-bundle",
+      "inherits": ["bundle", "default"],
+      "configurePreset": "macos-m1-ninja-clang-release"
+    }
+  ]
+}

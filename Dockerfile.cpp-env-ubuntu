@@ -1,0 +1,86 @@
+# Build and run:
+#   docker build --rm --progress=plain -t clion/ubuntu/cpp-env -f Dockerfile.cpp-env-ubuntu .
+#   docker run -it --rm clion/ubuntu/cpp-env:latest /bin/bash
+
+#FROM ubuntu:latest as llvm
+#
+#ARG LLVM_INSTALL_DIR=llvm
+#ARG DEBIAN_FRONTEND=noninteractive
+#
+#RUN apt-get update \
+#    && apt-get install -y \
+#    --no-install-recommends \
+#    --fix-missing \
+#    build-essential \
+#    cmake \
+#    ca-certificates \
+#    git \
+#    gcc \
+#    g++ \
+#    ninja-build \
+#    python3 \
+#    && apt-get upgrade -y \
+#    && rm -rf /var/lib/apt/lists/* \
+#    && apt clean && apt autoremove -y
+#
+#ARG LLVM_BUILD=build
+#
+#RUN git clone --depth 1 https://github.com/llvm/llvm-project.git llvm-sources \
+#    && ls -la llvm-sources \
+#    && mkdir ${LLVM_BUILD} ${LLVM_INSTALL_DIR} \
+#    && cmake \
+#        -DCMAKE_INSTALL_PREFIX=${LLVM_INSTALL_DIR} \
+#        -DLLVM_ENABLE_PROJECTS="clang;lld;lldb" \
+#        -DCMAKE_BUILD_TYPE=Release \
+#        -DLLVM_PARALLEL_{COMPILE,LINK}_JOBS=6 \
+#        -S llvm-sources/llvm -B ${LLVM_BUILD} -G Ninja \
+#    && cmake --build ${LLVM_BUILD} --target install
+
+
+FROM ubuntu:latest as cmake
+
+ARG CMAKE_INSTALL_DIR=/cmake
+ARG CMAKE_VERSION=v3.29.5
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG TZ=Europe/Moscow
+
+RUN apt-get update \
+    && apt-get install -y \
+    --no-install-recommends \
+    --fix-missing \
+    ca-certificates \
+    wget \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt clean && apt autoremove -y
+
+RUN mkdir ${CMAKE_INSTALL_DIR} \
+    && wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh \
+    && chmod +x cmake-linux.sh \
+    && ./cmake-linux.sh -- --skip-license --prefix=${CMAKE_INSTALL_DIR}
+
+
+FROM ubuntu:latest
+
+RUN apt-get update \
+    && apt-get install -y \
+    --no-install-recommends \
+    --fix-missing \
+    build-essential \
+    ca-certificates \
+    git \
+    wget \
+    lsb-release \
+    software-properties-common \
+    gnupg \
+    ninja-build \
+    valgrind \
+    gdb \
+    sudo \
+    && bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" \
+    && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt clean && apt autoremove -y
+
+COPY --from=cmake /cmake /cmake

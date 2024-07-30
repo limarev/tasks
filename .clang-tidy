@@ -1,0 +1,51 @@
+Checks: '
+-*,
+bugprone-*,
+performance-*,
+readability-*,
+-readability-braces-around-statements,
+-readability-identifier-length,
+misc-*,
+-misc-const-correctness,
+-misc-unused-parameters,
+-misc-non-private-member-variables-in-classes,
+-misc-no-recursion,
+modernize-*,
+-modernize-use-trailing-return-type,
+clang-diagnostic-*,
+llvm-*,
+cppcoreguidelines-*,
+-cppcoreguidelines-init-variables,
+-cppcoreguidelines-avoid-non-const-global-variables,
+cert-dc121-cpp,
+cert-dc158-cpp,
+cert-err34-c,
+cert-err52-cpp,
+cert-err60-cpp,
+cert-flp30-c,
+cert-mac50-cpp,
+cert-mac51-cpp,
+cert-str34-c,
+google-default-arguments,
+google-explicit-constructor,
+google-runtime-operator,
+hicpp-exception-baseclass,
+hicpp-multiway-paths-covered'
+
+CheckOptions:
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.UnionCase
+    value: CamelCase
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.IgnoreMainLikeFunctions
+    value: 1

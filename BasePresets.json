@@ -1,0 +1,142 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "debug": {
+        "output": false,
+        "find": false
+      },
+      "binaryDir": "${presetName}",
+      "hidden": true
+    },
+    {
+      "name": "windows",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "hidden": true
+    },
+    {
+      "name": "linux",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "hidden": true
+    },
+    {
+      "name": "darwin",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      },
+      "hidden": true
+    },
+    {
+      "name": "ninja",
+      "generator": "Ninja",
+      "hidden": true
+    },
+    {
+      "name": "gcc-amd64",
+      "inherits": ["linux"],
+      "toolchainFile": "toolchains/amd64/linux-amd64-gcc.cmake",
+      "hidden": true
+    },
+    {
+      "name": "clang-linux-amd64",
+      "inherits": ["linux"],
+      "toolchainFile": "toolchains/amd64/linux-amd64-clang.cmake",
+      "hidden": true
+    },
+    {
+      "name": "clang-darwin-amd64",
+      "inherits": ["darwin"],
+      "toolchainFile": "toolchains/amd64/darwin-amd64-clang.cmake",
+      "hidden": true
+    },
+    {
+      "name": "clang-darwin-arm64",
+      "inherits": ["darwin"],
+      "toolchainFile": "toolchains/arm64/darwin-arm64-clang.cmake",
+      "hidden": true
+    },
+    {
+      "name": "msvc-amd64",
+      "inherits": ["windows"],
+      "toolchainFile": "toolchains/amd64/windows-amd64-msvc.cmake",
+      "environment": {
+        "BUILDTOOLS_INSTALL_PATH": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools"
+      },
+      "hidden": true
+    },
+    {
+      "name": "release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      },
+      "hidden": true
+    },
+    {
+      "name": "debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      },
+      "hidden": true
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "default",
+      "vendorName": "Some company",
+      "description": "Very useful tool",
+      "variables": {
+        "CPACK_PACKAGE_CONTACT": "https://www.company.com"
+      },
+      "output": {
+        "debug": false,
+        "verbose": false
+      },
+      "hidden": true
+    },
+    {
+      "name": "deb",
+      "generators": ["DEB"],
+      "variables": {
+        "CPACK_DEBIAN_FILE_NAME": "DEB_DEFAULT",
+        "CPACK_DEBIAN_PACKAGE_SECTION": "misc",
+        "CPACK_COMPONENTS_GROUPING": "ALL_COMPONENTS_IN_ONE",
+        "CPACK_DEB_COMPONENT_INSTALL": "YES",
+        "CPACK_DEBIAN_PACKAGE_DEPENDS": ""
+      },
+      "hidden": true
+    },
+    {
+      "name": "rpm",
+      "generators": ["RPM"],
+      "variables": {
+        "CPACK_RPM_FILE_NAME": "RPM-DEFAULT",
+        "CPACK_RPM_PACKAGE_GROUP": "mics",
+        "CPACK_PACKAGE_REQUIRES": "",
+        "CPACK_PACKAGING_INSTALL_PREFIX": "/opt",
+        "CPACK_RPM_PACKAGE_RELOCATABLE": "ON"
+      },
+      "hidden": true
+    },
+    {
+      "name": "bundle",
+      "generators": ["BUNDLE"],
+      "hidden": true
+    }
+  ]
+}
