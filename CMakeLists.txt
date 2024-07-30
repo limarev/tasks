@@ -1,15 +1,14 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(template
-        VERSION 1.0.0
-        DESCRIPTION "How template works"
+project(interview_tasks
+        DESCRIPTION "Interview tasks"
         LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD_REQUIRED 23)
+set(CMAKE_CXX_STANDARD_REQUIRED 17)
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
-add_executable(template)
+add_executable(task1)
 
-target_sources(template
+target_sources(task1
         PRIVATE
         main.cpp)

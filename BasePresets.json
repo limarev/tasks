@@ -50,31 +50,37 @@
     {
       "name": "gcc-amd64",
       "inherits": ["linux"],
-      "toolchainFile": "toolchains/amd64/linux-amd64-gcc.cmake",
+      "toolchainFile": "cmake/toolchains/amd64/linux-amd64-gcc.cmake",
+      "hidden": true
+    },
+    {
+      "name": "linux-arm64-gcc",
+      "inherits": ["linux"],
+      "toolchainFile": "cmake/toolchains/arm64/linux-arm64-gcc.cmake",
       "hidden": true
     },
     {
       "name": "clang-linux-amd64",
       "inherits": ["linux"],
-      "toolchainFile": "toolchains/amd64/linux-amd64-clang.cmake",
+      "toolchainFile": "cmake/toolchains/amd64/linux-amd64-clang.cmake",
       "hidden": true
     },
     {
       "name": "clang-darwin-amd64",
       "inherits": ["darwin"],
-      "toolchainFile": "toolchains/amd64/darwin-amd64-clang.cmake",
+      "toolchainFile": "cmake/toolchains/amd64/darwin-amd64-clang.cmake",
       "hidden": true
     },
     {
       "name": "clang-darwin-arm64",
       "inherits": ["darwin"],
-      "toolchainFile": "toolchains/arm64/darwin-arm64-clang.cmake",
+      "toolchainFile": "cmake/toolchains/arm64/darwin-arm64-clang.cmake",
       "hidden": true
     },
     {
       "name": "msvc-amd64",
       "inherits": ["windows"],
-      "toolchainFile": "toolchains/amd64/windows-amd64-msvc.cmake",
+      "toolchainFile": "cmake/toolchains/amd64/windows-amd64-msvc.cmake",
       "environment": {
         "BUILDTOOLS_INSTALL_PATH": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools"
       },

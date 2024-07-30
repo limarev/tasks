@@ -1,6 +1,6 @@
 # Build and run:
-#   docker build --rm --progress=plain -t clion/ubuntu/cpp-env -f Dockerfile.cpp-env-ubuntu .
-#   docker run -it --rm clion/ubuntu/cpp-env:latest /bin/bash
+#   docker build --rm --progress=plain -t interview_tasks -f Dockerfile.interview_tasks .
+#   docker run -it --rm interview_tasks:latest /bin/bash
 
 #FROM ubuntu:latest as llvm
 #
