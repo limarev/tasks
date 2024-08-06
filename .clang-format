@@ -5,6 +5,3 @@ Standard: Latest
 ColumnLimit: 120
 QualifierAlignment: Custom
 QualifierOrder: [ 'inline', 'static', 'const', 'type' ]
----
-Language: Json
-IndentWidth: 2

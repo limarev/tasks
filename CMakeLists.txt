@@ -11,4 +11,8 @@ add_executable(task1)
 
 target_sources(task1
         PRIVATE
-        main.cpp)
+        task1.cpp
+        util.h)
+
+target_compile_options(task1 PRIVATE -fsanitize=thread)
+target_link_options(task1 PRIVATE -fsanitize=thread)

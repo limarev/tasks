@@ -40,7 +40,7 @@
 FROM ubuntu:latest as cmake
 
 ARG CMAKE_INSTALL_DIR=/cmake
-ARG CMAKE_VERSION=v3.29.5
+ARG CMAKE_VERSION=3.30.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG TZ=Europe/Moscow
@@ -56,7 +56,7 @@ RUN apt-get update \
     && apt clean && apt autoremove -y
 
 RUN mkdir ${CMAKE_INSTALL_DIR} \
-    && wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-x86_64.sh \
+    && wget -q -O cmake-linux.sh https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-aarch64.sh \
     && chmod +x cmake-linux.sh \
     && ./cmake-linux.sh -- --skip-license --prefix=${CMAKE_INSTALL_DIR}
 
@@ -78,7 +78,6 @@ RUN apt-get update \
     valgrind \
     gdb \
     sudo \
-    && bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)" \
     && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/* \
     && apt clean && apt autoremove -y
